@@ -1,6 +1,7 @@
+_The git remote for the repo is named *valet*_
+
+
 Name, mobile number, license plate
-
-
 
 and then you get an sms 
 
@@ -42,15 +43,25 @@ database
 ========
 
 table: users
+
 |
+
 |---- s.no  [not needed]
+
 |---- full_name
+
 |---- phone_number
+
 |---- car_reg_no
+
 |---- car_color
+
 |---- car_model_make
+
 |---- ticket_no
+
 |---- payment_status
+
 |---- amount_to_be_paid
 
 
