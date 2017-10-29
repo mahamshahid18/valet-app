@@ -1,0 +1,62 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Valet App",
+		"_postman_id": "3ef2d554-2923-8c09-aace-fbb207498efc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate Ticket",
+			"request": {
+				"url": "localhost:3000/generateTicket",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "\"Maham Shahid\"",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "phone",
+							"value": "+923025130350",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "reg_no",
+							"value": "IDL7743",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "color",
+							"value": "Golden",
+							"type": "text",
+							"enabled": true
+						},
+						{
+							"key": "model_make",
+							"value": "Honda City",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "Adds data to db, generates ticket no, generates link to view the ticket based portal for the user"
+			},
+			"response": []
+		}
+	]
+}

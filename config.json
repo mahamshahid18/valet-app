@@ -1,0 +1,9 @@
+{
+	"baseUrl": "localhost",
+	"backendPort": "3000",
+	"dbPort": "",
+	"dbName": "valetapp",
+	"dbUserName": "root",
+	"dbPassword": "",
+	"dbConnLimit": 500
+}

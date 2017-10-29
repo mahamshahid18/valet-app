@@ -1,0 +1,19 @@
+{
+  "name": "valet-app-backend",
+  "version": "1.0.0",
+  "description": "API implementation for Valet App project",
+  "main": "./app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./app.js",
+    "install-dep": "npm install --production"
+  },
+  "author": "Maham Shahid",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "mysql": "^2.13.0"
+  }
+}
