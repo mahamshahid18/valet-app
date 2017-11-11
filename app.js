@@ -58,8 +58,8 @@ app.route('/generateTicket')
 		const color = req.body.color;
 		const model_make = req.body.model_make;
 		const ticket_no = `${seq_no}${reg_no}`;
-		// convert ticket_no to base64 before building link
-		const ticket_link = `baseUrl/user?enc_tic=${ticket_no}`;
+		// TODO: convert ticket_no to base64 before building link
+		const ticket_link = `baseUrl/user?ticket=${ticket_no}`;
 
 		const query = 'INSERT INTO `users`\
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -91,6 +91,110 @@ app.route('/generateTicket')
 				fs.writeFile('sequencer.json', JSON.stringify({
 					"start": seq_no
 				}, null, 4));
+			}
+		}
+	});
+
+app.route('/user')
+	.get((req, res) => {
+		// TODO: decode from base64 first
+		const ticket_no = req.query.ticket;
+		const query = 'SELECT * FROM `users` WHERE ticket_no = ?';
+
+		pool.getConnection((err, connection) => {
+			if(err) {
+				throw err;
+			}
+			connection.query(query, ticket_no, queryHandler);
+			connection.release();
+		});
+
+		const queryHandler = (err, result) => {
+			if(err) {
+				// query failed
+				const errorModel = {
+					errorCode: 500,
+					errorMessage: 'Error executing the query on db',
+					errorObject: err
+				};
+				console.log(errorModel);
+			} else {
+				res.status(200);
+				res.send(result[0]);
+			}
+		}
+	});
+
+app.route('/user/validation')
+	.get((req, res) => {
+		var qrcode = require('qrcode');
+		// TODO: base64 decoding first
+		const ticket_no = req.query.ticket;
+
+		// full_name, ticket_no, car_reg_no, car_model_make, payment_status, amount_paid
+				const query = 'SELECT full_name,\
+						ticket_no,\
+						car_reg_no,\
+						payment_status,\
+						amount_to_be_paid\
+					FROM `users` WHERE ticket_no = ?';
+
+		pool.getConnection((err, connection) => {
+			if(err) {
+				throw err;
+			}
+			connection.query(query, ticket_no, queryHandler);
+			connection.release();
+		});
+
+		const queryHandler = (err, result) => {
+			if(err) {
+				// query failed
+				const errorModel = {
+					errorCode: 500,
+					errorMessage: 'Error executing the query on db',
+					errorObject: err
+				};
+				console.log(errorModel);
+			} else {
+				const segments = [
+					{ 'data': result[0].car_reg_no, mode: 'alphanumeric' },
+					{ 'data': result[0].amount_to_be_paid, mode: 'numeric' },
+					{ 'data': result[0].payment_status === 0 ? 'UNPAID' : 'PAID', mode: 'alphanumeric' },
+				];
+				const qrObject = qrcode.create(segments);
+				res.status(200);
+				res.send(qrObject);
+			}
+		}
+	});
+
+app.route('/user/updatePaymentStatus')
+	.post((req, res) => {
+		// TODO: decode from base64 first
+		const ticket_no = req.body.ticket;
+		const query = 'UPDATE `users` SET payment_status = 1 WHERE ticket_no = ?';
+
+		pool.getConnection((err, connection) => {
+			if(err) {
+				throw err;
+			}
+			connection.query(query, ticket_no, queryHandler);
+			connection.release();
+		});
+
+		const queryHandler = (err, result) => {
+			if(err) {
+				// query failed
+				const errorModel = {
+					errorCode: 500,
+					errorMessage: 'Error executing the query on db',
+					errorObject: err
+				};
+				console.log(errorModel);
+			} else {
+				res.status(200);
+				res.send();
 			}
 		}
 	});

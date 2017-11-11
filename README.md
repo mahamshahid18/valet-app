@@ -87,10 +87,10 @@ POST {baseurl}/generateTicket
 -------------------------------------------
 
 -------------------------------------------
-GET {baseurl}/updatePaymentStatus?enc_tic=
+GET {baseurl}/updatePaymentStatus
 
  -- params
-  +  enc_tic (query param)
+  +  ticket_no (body param)
 
  -- returns
   +  none
@@ -102,10 +102,10 @@ GET {baseurl}/updatePaymentStatus?enc_tic=
 -------------------------------------------
 
 -------------------------------------------
-GET {baseurl}/user?enc_tic=
+GET {baseurl}/user?ticket=
 
  -- params
-  +  enc_tic (query param)
+  +  ticket (query param)
 
  -- returns
   +  ticket_no (not encrypted one)
@@ -119,10 +119,10 @@ GET {baseurl}/user?enc_tic=
 -------------------------------------------
 
 -------------------------------------------
-GET {baseurl}/user/validation?enc_tic=
+GET {baseurl}/user/validation?ticket=
 
  -- params
-  +  enc_tic (query param) [the encrpted
+  +  ticket (query param) [the encrpted
                             ticket number]
 
  -- returns
