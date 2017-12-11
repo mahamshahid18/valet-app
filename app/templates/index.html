@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" ng-app='ValetApp'>
+  <head>
+    <title>Valet App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <!-- <base href="/valet/app/templates/"> -->
+  </head>
+  
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Roboto';
+      color: #3A539B;
+    }
+    body {
+      background: linear-gradient(#79eff6, #3dcefd) no-repeat;
+      background: -moz-linear-gradient(#79eff6, #3dcefd) no-repeat;
+      background: -webkit-linear-gradient(#79eff6, #3dcefd) no-repeat;
+      background: -o-linear-gradient(#79eff6, #3dcefd) no-repeat;
+    }
+    span {
+      margin: 2% auto;
+      border: 2px solid #5C97BF;
+      border-radius: 10%;
+      padding: 10px 10px;     
+    }
+    p {
+      margin: 15% auto;
+      font-size: 72%;
+    }
+    div.container > div.row {
+      margin: 30% auto;
+    }
+    div.func-buttons {
+      margin: 10% auto;
+    }
+    div.func-buttons > button {
+      background-color: #576fb1;
+      border-color: #576fb1;
+      color: #79eff6;
+      -webkit-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.45);
+    -moz-box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.45);
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.45);
+    }
+    div.func-buttons > button:hover {
+      background-color: #3a539b;
+      border-color: #3a539b;
+      color: #3dcefd;
+    }
+    div.func-buttons > button:active {
+      background-color: #3a539b;
+      /*border-color: #3a539b;*/
+      color: #3dcefd;
+    }
+  </style>
+
+  <body ng-controller="ValetController">
+      <div ng-view></div>
+
+      <script src="../../dependencies/js/angular.min.js"></script>
+      <script src="../../dependencies/js/angular-route.min.js"></script>
+      <script src="../../dependencies/js/qrcode.min.js"></script>
+      <script src="../modules/valet.module.js"></script>
+      <script src="../controllers/valet.js"></script>
+      <script src="../controllers/customer.js"></script>
+      <script src="../controllers/validation.js"></script>
+      <script src="../services/endpoint.js"></script>
+  </body>
+</html>

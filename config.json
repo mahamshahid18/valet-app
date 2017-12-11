@@ -1,5 +1,5 @@
 {
-	"baseUrl": "localhost",
+	"baseUrl": "192.168.1.7",
 	"backendPort": "3000",
 	"dbPort": "",
 	"dbName": "valetapp",

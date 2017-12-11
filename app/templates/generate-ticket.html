@@ -1,0 +1,58 @@
+    <nav class="navbar sticky-top navbar-light bg-light navbar-gradient">
+      <a class="navbar-brand" href="#">
+        <i class="fa fa-car" class="d-inline-block align-top"></i>
+        Valet App
+      </a>
+    </nav>
+    <div class="container">
+      <h2>Customer Details</h2>
+      <br/>
+      <form>
+        <div class="form-group">
+          <label>Name</label>
+            <input type="text"
+                class="form-control"
+                id="customerName"
+                aria-describedby="name"
+                placeholder="Example: Steve Jobs"
+                ng-model="ticketModel.name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text"
+              class="form-control"
+              id="phone"
+              placeholder="Example: +9222101234567"
+              ng-model="ticketModel.phone">
+          <small class="text-muted">Do not add hyphens. Include country code</small>
+        </div>
+        <div class="form-group">
+          <label>License Plate Number</label>
+          <input type="text"
+              class="form-control"
+              id="license"
+              placeholder="Example: AUDI1234"
+              ng-model="ticketModel.reg_no">
+        </div>
+        <div class="form-group">
+          <label>Car Model & Make</label>
+          <input type="text"
+              class="form-control"
+              id="modelMake"
+              placeholder="Example: Honda City"
+              ng-model="ticketModel.model_make">
+        </div>
+        <div class="form-group">
+          <label>Color of the Car</label>
+          <input type="text"
+              class="form-control"
+              id="carColor"
+              placeholder="Example: Golden"
+              ng-model="color">
+        </div>
+        <br/>
+        <button type="submit"
+            class="btn btn-lg btn-block"
+            ng-click="generateTicket()">Generate</button>
+      </form>
+    </div>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" ng-app = 'ValetApp'>
+  <head>
+    <title>Valet App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet"> 
+  </head>
+
+  <style>
+  	html, body {
+  		height: 100%;
+  		width: 100%;
+  		font-family: 'Roboto';
+  		color: #3A539B;
+  	}
+    h2 {
+      font-weight: bold;
+    }
+    span > i {
+      display: inline;
+    }
+    span > h5 {
+      display: inline;
+      font-weight: bold;
+    }
+    span > p {
+      display: inline;
+    }
+    div.container {
+      padding-top: 7%;
+      padding-bottom: 15%;
+    }
+    div.row.detail-container {
+      margin-top: 10vh;
+    }
+    i.fa {
+      padding-left: 4%;
+      padding-right: 4%;
+    }
+    .navbar-gradient {
+      background: linear-gradient(#79eff6, #3dcefd) no-repeat;
+      background: -moz-linear-gradient(#79eff6, #3dcefd) no-repeat;
+      background: -webkit-linear-gradient(#79eff6, #3dcefd) no-repeat;
+      background: -o-linear-gradient(#79eff6, #3dcefd) no-repeat;
+    }
+    #camera-container {
+      border: 1px solid #3A539B;
+      border-radius: 10%;
+      height: 20vh;
+      width: 35vw;
+      padding: 7% auto;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 15%;
+    }
+  </style>
+
+  <body ng-controller="ValetController">
+    <nav class="navbar sticky-top navbar-light bg-light navbar-gradient">
+      <a class="navbar-brand" href="#">
+        <i class="fa fa-car" class="d-inline-block align-top"></i>
+        Valet App
+      </a>
+    </nav>
+    <div class="container">
+      <h2>Ticket Validation</h2>
+      <div class="row">
+        <div class="col">
+          <div id="camera-container"></div>
+        </div>
+      </div>
+      <div class="row detail-container">
+        <div class="col">
+          <span>
+            <i class="fa fa-id-card" style="color: #fabe58"></i>
+            <h5>License Plate No: </h5>
+            <p>AUDI1234</p>
+          </span>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col">
+          <span>
+            <i class="fa fa-money" style="color: #81CFE0"></i>
+            <h5>Amount: </h5>
+            <p>$5</p>
+          </span>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col">
+          <span>
+            <i class="fa fa-check-square" style="color: #87d37c"></i>
+            <h5>Payment Status: </h5>
+            <p>PAID</p>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <script src="../../dependencies/js/angular.min.js"></script>
+    <script src="../../dependencies/js/angular-route.min.js"></script>
+    <script src="../modules/valet.module.js"></script>
+    <script src="../controllers/valet.js"></script>
+    <script src="../controllers/customer.js"></script>
+    <script src="../services/endpoint.js"></script>
+  </body>
+</html>

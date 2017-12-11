@@ -1,0 +1,64 @@
+    <nav class="navbar sticky-top navbar-light bg-light navbar-gradient">
+      <a class="navbar-brand" href="#">
+        <i class="fa fa-car" class="d-inline-block align-top"></i>
+        Valet App
+      </a>
+    </nav>
+    <div class="container-fluid">
+      <div class="jumbotron jumbotron-fluid">
+          <div class="container">
+            <h1 class="display-4 text-center">{{dataModel.full_name}}</h1>
+            <br/><br/>
+            <div class="row">
+              <span class="col-5">
+                <i class="fa fa-ticket d-inline"></i>
+                <label class="d-inline">Ticket No.</label>
+              </span>
+              <span class="col-7">{{dataModel.ticket_no}}</span>
+            </div>
+            <div class="row">
+              <span class="col-5">
+                <i class="fa fa-money d-inline"></i>
+                <label class="d-inline">Total.</label>
+              </span>
+              <span class="col-7">{{dataModel.amount_to_be_paid | currency}}</span>
+            </div>
+            <div class="row">
+              <span class="col-5">
+                <i class="fa fa-car d-inline"></i>
+                <label class="d-inline">Car.</label>
+              </span>
+              <span class="col-7">{{dataModel.car_color + ' ' + dataModel.car_model_make}}</span>
+            </div>
+          </div>
+      </div>
+      <div ng-hide = "paymentControl.showPayment"
+          class="row-fluid text-center btn-container">
+        <button class="btn btn-primary btn-lg"
+            ng-click="showPayment()">Call Car</button>
+        <button class="btn btn-primary btn-lg">Validate</button>
+      </div>
+      <div class="row-fluid" ng-show = "paymentControl.showPayment">
+        <form>
+          <div class="form-group">
+            <label>Card Number</label>
+              <input type="text" class="form-control" id="cardNo" aria-describedby="card number" placeholder="Example: 123456789999">
+          </div>
+          <div class="form-group">
+            <label>CVV</label>
+            <input type="text" class="form-control" id="cvv" placeholder="Example: 123">
+          </div>
+          <div class="form-group">
+            <label>Expiry</label>
+            <input type="text" class="form-control" id="expiry" placeholder="Example: 23-3-2018">
+          </div>
+          <br/>
+          <button type="submit"
+              class="btn btn-primary btn-block"
+              ng-click="makePayment()">Pay</button>
+          <button type="submit"
+              class="btn btn-primary btn-block"
+              ng-click="cancelPayment()">Cancel</button>
+        </form>
+      </div>
+    </div>

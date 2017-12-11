@@ -1,27 +1,35 @@
 _The git remote for the repo is named *valet*_
 
 
-Name, mobile number, license plate
+Usage Instructions
+==================
+1. Add receiving number to verified list of numbers on Twilio to be able to send sms
+    + Login with Twilio Account Credentials
+    + Navigate to https://www.twilio.com/console/phone-numbers/verified
+    + Click on the Add New Number button
+    + Add the new number (+[country code][phone number]) => follow this format
+    + Add in the verification code sent to that number
+    + Number is verified. Now sms can be sent to this number
 
-and then you get an sms 
+2. Find out IP address of the machine you're using
+    + Click Start and type "PowerShell". Open it up
+    + Now type `ipconfig`
+    + Under the `Wireless LAN adapter Wi-Fi` heading, find the number listed with 'IPv4 address' (for example, it can be 192.168.1.7)
+    + Copy this IP address
 
+3. Change IP address in configuration file
+    + Open up the `config.json` file in the main folder (of the project)
+    + Replace the number listed against `baseUrl` field with the IP address you copied
+    + Save changes
 
-help with efficeincy, make it convenient
+4. Start backend server
+    + While within the main folder of the project (for example C:/users/user/Valet/), hold down the `Shift` key and right click with the mouse simultaneously inside the folder window.
+    + Click on `Open PowerShell window here`
+    + Now type in the following command to start the server: `node app`
 
+And that's it. Now you can start using the application. Navigate to `http://{your_ip_address}/valet/app/templates/#!/` to open up the main page
 
-call the car and then make a payment
-
-
-generating random ticket no ==> HAS TO WORK
-the ticket number will be linked 
-
-
-how the ticket is generated (click of a button generates a ticket)  (how the system generates a random and unique code)
-how does the code is sent to the sms
-how can the ticket be validated
-
-
-
+_The sections below are technical documentation_
 
 user perspective
 ================
@@ -39,14 +47,12 @@ this makes a call to the backend which will generate a ticket number using a ran
 - backend gives a notification to the frontend when a car has been requested. valet can just go ahead and bring the car and when the owner arrives, scan a QR code which is available on their thank you screen to validate if the ticket has already been paid. [for this, there can be a requests drop down menu which will have all the requested car's list and every valet using the application will be able to see this list]
 
 
-database
-========
+Database Design
+===============
 
 table: users
 
 |
-
-|---- s.no  [not needed]
 
 |---- full_name
 
@@ -65,8 +71,8 @@ table: users
 |---- amount_to_be_paid
 
 
-api
-===
+API Design
+==========
 -------------------------------------------
 POST {baseurl}/generateTicket
 
@@ -137,9 +143,5 @@ GET {baseurl}/user/validation?ticket=
 
 stuff to be used
 ================
-https://cdnjs.com/libraries/socket.io
-base64encode/decode from helper files already written :')
-https://www.npmjs.com/package/qrcode-npm [create qrcode]
 https://github.com/soldair/node-qrcode [create qrcode]
-https://github.com/schmich/instascan [scan qrcode]
-http://www.spryng.nl/ [for sending sms]
+https://cdnjs.com/libraries/socket.io   [in the future]
