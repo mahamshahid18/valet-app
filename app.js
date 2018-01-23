@@ -17,15 +17,10 @@ const dbConnectConfig = {
 	database: '',
 	connectionLimit: 0
 };
-let baseUrl = '';
 
 const setConfigSettings = () => {
 	let configData = fs.readFileSync('config.json');
 	configData = JSON.parse(configData);
-
-	baseUrl = (configData.backendPort === null) || (configData.backendPort === '')
-				? `${configData.baseUrl}`
-				: `${configData.baseUrl}:${configData.backendPort}`;
 
 	dbConnectConfig.host = configData.baseUrl;
 	dbConnectConfig.port= configData.dbPort;
@@ -80,7 +75,7 @@ app.route('/generateTicket')
 		// TODO: convert ticketNum to base64 before building link
 		// TODO: convert base-url before shipping code
 		const ticketLink =
-			`http://${baseUrl}/valet/app/templates/#!/user?ticket=${ticketNum}`;
+			`http://${dbConnectConfig.host}/valet/app/templates/#!/user?ticket=${ticketNum}`;
 
 		const query = 'INSERT INTO `users`\
 			VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
@@ -119,6 +114,9 @@ app.route('/generateTicket')
 					to: phoneNumber,
 					from: twilioPhoneNumber
 				});
+
+				console.log('Ticket generated!');
+				console.log(ticketLink);
 
 				res.status(200);
 				res.send();
@@ -167,6 +165,8 @@ app.route('/user')
 				};
 				console.log(errorModel);
 			} else {
+				console.log('user data sent');
+				
 				res.status(200);
 				res.send(result[0]);
 			}
@@ -226,6 +226,8 @@ app.route('/user/validation')
 						mode: 'alphanumeric'
 					},
 				];
+				console.log('data sent');
+
 				res.status(200);
 				res.send(segments);
 			}
@@ -268,6 +270,7 @@ app.route('/user/updatePaymentStatus')
 				};
 				console.log(errorModel);
 			} else {
+				console.log(`payment status updated for ticket no: ${ticketNum}`);
 				res.status(200);
 				res.send();
 			}

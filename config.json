@@ -1,6 +1,6 @@
 {
 	"baseUrl": "192.168.1.9",
-	"backendPort": "",
+	"backendPort": "3000",
 	"dbPort": "",
 	"dbName": "valetapp",
 	"dbUserName": "root",
