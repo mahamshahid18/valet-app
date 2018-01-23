@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./app.js",
-    "install-dep": "npm install --production"
+    "install-dep": "npm install --production",
+    "lint": "eslint app.js"
   },
   "author": "Maham Shahid",
   "license": "MIT",
@@ -14,8 +15,33 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
+    "helmet": "^3.9.0",
     "mysql": "^2.13.0",
-    "qrcode": "^1.0.0",
     "twilio": "^3.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "node-style-guide": "^1.0.0"
+  },
+  "eslintConfig": {
+    "extends": "node-style-guide",
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "max-len": [
+        1,
+        100
+      ],
+      "keyword-spacing": [
+        2,
+        {
+          "before": true,
+          "after": true
+        }
+      ],
+      "space-after-keywords": 0
+    }
   }
 }

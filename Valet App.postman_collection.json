@@ -24,37 +24,86 @@
 					"urlencoded": [
 						{
 							"key": "name",
-							"value": "\"Maham Shahid\"",
+							"value": "\"test-clean-code\"",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "phone",
-							"value": "+923025130350",
+							"value": "+3334445678",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "reg_no",
-							"value": "IDL7743",
+							"value": "TEST123",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "color",
-							"value": "Golden",
+							"value": "test",
 							"type": "text",
 							"enabled": true
 						},
 						{
 							"key": "model_make",
-							"value": "Honda City",
+							"value": "Test Car",
 							"type": "text",
 							"enabled": true
 						}
 					]
 				},
 				"description": "Adds data to db, generates ticket no, generates link to view the ticket based portal for the user"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Details",
+			"request": {
+				"url": "localhost:3000/user?ticket=0IDL7743",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Get the details of the user and generate a webpage with the data. This endpoint will be called when the user opens up the link that will be forwarded on their phone"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Validation",
+			"request": {
+				"url": "localhost:3000/user/validation?ticket=0IDL7743",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "Check if the user has already paid for the ticket. Will return data for QRCode creation"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Payment Status",
+			"request": {
+				"url": "localhost:3000/user/updatePaymentStatus",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ticket",
+							"value": "9TEST123",
+							"type": "text",
+							"enabled": true
+						}
+					]
+				},
+				"description": "Set payment status to 1 (PAID) for a ticket which has been paid for"
 			},
 			"response": []
 		}
