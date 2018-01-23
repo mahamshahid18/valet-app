@@ -1,8 +1,92 @@
-_The git remote for the repo is named *valet*_
+# Valet Ticket Automation Application
+
+This application aims to automate the general flow of valet parking systems by handling the ticket generation, payment, and verification of payment digitally.
+
+> [**This is the item to be reviewed in this repository**](https://github.com/mahamshahid18/valet-app/blob/master/app.js) 
+
+## How It Works
+
+There are 2 parts of the application. A user-facing application. And a version for the valets/parking attendants.
+Upon arrival, the user simply has to provide his/her name, phone number and the car's details to the valet. The valet will generate a ticket for them using the application. And the user will get a link through SMS, to view the ticket and associated details. The user can also pay for the ticket. However, the payment system has not been integrated in the current version of the application.
+When the user wants to leave, instead of handing over the ticket physically to the valet & waiting for the car to arrive, he/she can simply pay for the ticket online and then "Call Car" beforehand. They will receive a QR Code at this point, from the application. This has to be shown to the valet. And the car will be waiting to be picked up - without any wait.
+
+## API Design
+
+The application uses 4 endpoints. They have been documented below:
+
+-------------------------------------------
+
+#### POST {baseurl}/generateTicket
+
+##### _Params_
+  *  name
+  *  phone_number
+  *  reg_no
+  *  color
+  *  model_make
+
+##### _Returns_
+  *  200 OK
+
+-------------------------------------------
+
+#### POST {baseurl}/updatePaymentStatus
+
+##### _Params_
+  *  ticket_no (body param)
+
+##### _Returns_
+  *  200 OK
+
+-------------------------------------------
+
+#### GET {baseurl}/user
+
+##### _Params_
+  *  ticket (query param)
+
+##### _Returns_
+  *  ticket_no
+  * name
+  * amount_to_be_paid
+
+-------------------------------------------
+
+#### GET {baseurl}/user/validation
+
+##### _Params_
+  *  ticket (query param)
+
+##### _Returns_
+  *  segments (json data containing info for QR Code)
+
+-------------------------------------------
 
 
-Usage Instructions
-==================
+## API Implementation
+
+Please see the [complete implementation of the API backend here.](https://github.com/mahamshahid18/valet-app/blob/master/app.js)
+
+## API Testing
+
+The API's endpoints have been tested with [Postman](https://www.getpostman.com/). Please find the tests [here](https://github.com/mahamshahid18/valet-app/blob/master/Valet%20App.postman_collection.json)
+
+
+## Usage Instructions
+
+If you want to run the backend server (the REST API), please follow the following steps
+
+* Install [Node.js](https://nodejs.org/en/download/) if you don't already have it installed
+* Run `npm install` to install all dependencies
+* Make changes in the `config.json` file to set IP Address and port accordingly
+* Run `npm start` to start the server
+* `app.js` code conforms to the [Node Style Guide](https://github.com/felixge/node-style-guide). Run `npm run lint` to lint the code
+
+
+#### Extra Information
+
+_This information is just to get the app working. For the app-developers only_
+
 1. Add receiving number to verified list of numbers on Twilio to be able to send sms
     + Login with Twilio Account Credentials
     + Navigate to https://www.twilio.com/console/phone-numbers/verified
@@ -28,120 +112,3 @@ Usage Instructions
     + Now type in the following command to start the server: `node app`
 
 And that's it. Now you can start using the application. Navigate to `http://{your_ip_address}/valet/app/templates/#!/` to open up the main page
-
-_The sections below are technical documentation_
-
-user perspective
-================
-- gives details upon arrival
-- receives text message and opens up the link
-- clicks on call car and is taken to payment gateway
-now on payment gateway, after he presses send, on the frontend, a call is made to the banking api which may accept or refuse payment. if the payment is accepted, in the callback success function => call the backend and let it know that the ticket no blah blah has been paid
-- user is taken to thank you screen which will contain a qr code having information about the ticket number, amount to be paid and payment status
-
-
-valet perspective
-=================
-- takes details upon arrival and clicks on generate ticket
-this makes a call to the backend which will generate a ticket number using a random number generator merged with the license plate of the car. OR it can be a sequential number merged with the license plate
-- backend gives a notification to the frontend when a car has been requested. valet can just go ahead and bring the car and when the owner arrives, scan a QR code which is available on their thank you screen to validate if the ticket has already been paid. [for this, there can be a requests drop down menu which will have all the requested car's list and every valet using the application will be able to see this list]
-
-
-Database Design
-===============
-
-table: users
-
-|
-
-|---- full_name
-
-|---- phone_number
-
-|---- car_reg_no
-
-|---- car_color
-
-|---- car_model_make
-
-|---- ticket_no
-
-|---- payment_status
-
-|---- amount_to_be_paid
-
-
-API Design
-==========
--------------------------------------------
-POST {baseurl}/generateTicket
-
- -- params
-  +  name
-  +  phone_number
-  +  reg_no
-  +  color
-  +  model_make
-
- -- returns
-  +  none [calls api to send sms]
-
- -- description
-  + to generate ticket, store
-    all data into the db, create
-    link for ticket & send sms
--------------------------------------------
-
--------------------------------------------
-GET {baseurl}/updatePaymentStatus
-
- -- params
-  +  ticket_no (body param)
-
- -- returns
-  +  none
-
- -- description
-  + to update the payment status
-    of the ticket number received
-    (after decoding of course)
--------------------------------------------
-
--------------------------------------------
-GET {baseurl}/user?ticket=
-
- -- params
-  +  ticket (query param)
-
- -- returns
-  +  ticket_no (not encrypted one)
-  + name
-  + fee to be paid
-
- -- description
-  + to get the base page on the client side
-    which has options for calling car,
-    making payment etc
--------------------------------------------
-
--------------------------------------------
-GET {baseurl}/user/validation?ticket=
-
- -- params
-  +  ticket (query param) [the encrpted
-                            ticket number]
-
- -- returns
-  +  qr_code containing info: car_reg_no,
-     payment status, amount paid
-
- -- description
-  + to create qr_code for verification of a 
-    specific ticket
--------------------------------------------
-
-
-stuff to be used
-================
-https://github.com/soldair/node-qrcode [create qrcode]
-https://cdnjs.com/libraries/socket.io   [in the future]
